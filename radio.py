@@ -32,13 +32,13 @@ def status():
 @app.route('/on')
 def on():
     run('on')
-    return redirect('/')
+    return jsonify(stauts='ok')
 
 
 @app.route('/off')
 def off():
     run('off')
-    return redirect('/')
+    return jsonify(stauts='ok')
 
 
 @app.route('/channels')
@@ -50,13 +50,8 @@ def list():
 
 @app.route('/channel/<channel_id>')
 def channel(channel_id=None):
-    if channel_id is None:
-        r = run('list')
-        r = [c.strip('\t') for c in r.split('\n')][2:-2]
-        return str(r)
-    else:
-        run(channel_id)
-        return redirect('/')
+    run(channel_id)
+    return jsonify(stauts='ok')
 
 
 @app.route('/vol/<action>')
@@ -69,13 +64,13 @@ def vol(action):
         else:
             arg = '-'
     run('vol', arg)
-    return redirect('/')
+    return jsonify(stauts='ok')
 
 
 @app.route('/mute')
 def mute():
     run('mute')
-    return redirect('/')
+    return jsonify(stauts='ok')
 
 
 if __name__ == '__main__':
